@@ -9,6 +9,7 @@ def index():
 @app.route('/success')
 def success():
     email = Email.get_all_emails()
+    flash("Success")
     return render_template('success.html', email = email)
 
 @app.route('/process', methods=['POST'])
@@ -17,7 +18,3 @@ def process():
         return redirect('/')
     Email.add_email(request.form)
     return redirect('/success')
-
-    # if not Email.validate_email(request.form):
-    #     return redirect('/')
-    # # else:

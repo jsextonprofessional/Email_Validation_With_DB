@@ -11,18 +11,24 @@ class Email():
         self.updated_at = data['updated_at']
 
     @classmethod
-    def get_all_dojos(cls):
-        query = "SELECT * FROM dojos;"
-        results = connectToMySQL('validation_email').query_db(query)
+    def get_all_emails(cls):
+        query = "SELECT * FROM emails;"
+        results = connectToMySQL('validation_emails_schema').query_db(query)
         emails = []
         for email in results:
-            emails.append(cls(email))
+            emails.append(email)
         return emails
 
+    @classmethod
+    def add_email(cls, data):
+        query = "INSERT INTO emails (email) VALUES (%(email)s);"
+        connectToMySQL('validation_emails_schema').query_db(query, data)
+
+
     @staticmethod
-    def validate_email(email):
+    def validate_email(data):
         is_valid = True
-        if not EMAIL_REGEX.match(email['email']): 
+        if not EMAIL_REGEX.match(data['email']): 
             flash("Invalid email address!")
             is_valid = False
         return is_valid

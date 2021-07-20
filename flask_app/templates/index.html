@@ -11,9 +11,15 @@
 <body>
     <!-- feedback div indicating invalid email -->
     <div>
-
+        {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+    {% if messages %}                            <!-- check if there are any messages -->
+        {% for message in messages %}            <!-- loop through the messages -->
+            <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+        {% endfor %}
+    {% endif %}
+{% endwith %}
     </div>
-    <form action="">
+    <form action="/process" method="POST">
         <label for="email"></label>
         <input type="text" name="email">
         <input type="submit" name="submit" value="Submit">

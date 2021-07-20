@@ -9,3 +9,9 @@ def index():
 @app.route('/success')
 def success():
     return render_template('success.html')
+
+@app.route('/process', methods=['POST'])
+def process():
+    if not Email.validate_email(request.form):
+        return redirect('/')
+    return redirect('/success')

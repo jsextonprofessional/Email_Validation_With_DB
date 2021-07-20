@@ -28,6 +28,7 @@ class Email():
     @staticmethod
     def validate_email(data):
         is_valid = True
+        flash("success")
         if not EMAIL_REGEX.match(data['email']): 
             flash("Invalid email address!")
             is_valid = False

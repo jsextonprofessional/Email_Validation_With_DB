@@ -13,9 +13,11 @@ def success():
 
 @app.route('/process', methods=['POST'])
 def process():
+    if not Email.validate_email(request.form):
+        return redirect('/')
     Email.add_email(request.form)
     return redirect('/success')
 
     # if not Email.validate_email(request.form):
     #     return redirect('/')
-    # else:
+    # # else:

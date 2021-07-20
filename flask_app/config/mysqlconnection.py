@@ -33,5 +33,6 @@ class MySQLConnection:
             finally:
                 self.connection.close()
 
+
 def connectToMySQL(db):
     return MySQLConnection(db)
